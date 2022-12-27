@@ -8,3 +8,4 @@ echo line3
 # \n : new line
 # \t : tab space
 echo -e "line1\nline2\nline3\tdivya\t\t\tdevops"
+echo -e "line1\nline2\tdivya"
