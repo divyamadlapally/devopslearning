@@ -10,3 +10,8 @@ echo a
 #how to print the value of a
 echo $a 
 # If you dont declare a value and if you try to print it, it is going to considerr the value as null
+echo value of a is $a 
+echo value of a is ${a}
+# $a and ${a} both are same
+echo print the value of a : ${a}
+echo print the value of d : ${d}
