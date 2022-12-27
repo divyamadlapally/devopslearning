@@ -6,3 +6,6 @@
 #apart from the Shebang notation, anything that starts with'#' is referred as a comment and is not executed by script.
 # Comments are just for the human readable purpose.
 echo "Hello World"
+echo line1
+echo line2
+echo divya
