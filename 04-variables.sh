@@ -15,3 +15,4 @@ echo value of a is ${a}
 # $a and ${a} both are same
 echo print the value of a : ${a}
 echo print the value of d : ${d}
+# export sends the value to the heep memory
