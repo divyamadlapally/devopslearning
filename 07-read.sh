@@ -1,2 +1,3 @@
 #!/bin/bash
-read -p  "Enter your name :" 
+name = read -p  "Enter your name :" 
+echo entered name is $name
