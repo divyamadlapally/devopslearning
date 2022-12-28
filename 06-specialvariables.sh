@@ -10,3 +10,6 @@ $# : prints the no of varibles used in this script
 echo name of the script is $0
 echo variables used in this script are $*
 echo no of variables used in this script are $#
+a=$1
+b=$2
+echo value of a is $a  
