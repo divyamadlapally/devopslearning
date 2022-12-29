@@ -21,7 +21,7 @@ fi
 
 #note : use == when you are dealing with strings, use -eq when dealing with numbers.
 
-b="$1"
+b=$1
 if [ "$b" -eq "10" ]; then
    echo "value is b 10"
 elif [ "$b" -eq "20" ]; then
