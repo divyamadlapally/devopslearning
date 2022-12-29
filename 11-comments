@@ -1,6 +1,6 @@
 #!/bin/bash
 echo Devops project oriented training
-<<COMMENTS
+<<COMMENT
 a=10
 echo $a 
-COMMENTS>>
+COMMENT
