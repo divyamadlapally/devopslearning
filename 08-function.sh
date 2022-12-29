@@ -15,6 +15,7 @@ stat() {
     echo "number of opened sessions : $(who | wc -l)"
     echo "todays date is: $(date +%F)"
     echo "load average on the system in last 1 minute: $(uptime | awk -F : '{print $NF}' | awk -F , '{print $1}')"
+echo -e "(\e[32m______ I am done; function completed_____\e[0m)"
 }
 #echo cualling stat function
 stat
