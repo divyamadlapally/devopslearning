@@ -1,21 +1,17 @@
 #!/bin/bash
 
+a="ABC"
+if [ "$a"=="ABC" ]; then
+    echo -e "\e[32m both are equal \e[0m"
 
-a="xyz"
+    fi
 
-if [ "$a" == "ABC" ]; then
-    echo -e "\e[35m both are equal \e[0m"
-    
+#if else
 
-fi
-
-#If else condition
-if [ "$a" == "ABC" ]; then
-    echo -e "\e[34m both are equal \e[0m"
-    exit 0
+if  [ "$a"=="ABC"]; then
+echo -e "\e[32m both are equal \e[0m"
 else
-    echo -e "\e[34m  both are not equal \e[0m"
-    exit 1
+echo -e "\e[32m both are not equal \e[0m"
 
 fi
 
