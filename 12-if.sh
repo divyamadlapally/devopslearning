@@ -3,14 +3,14 @@
 
 a="xyz"
 
-if [ "$a"=="ABC" ]; then
+if [ "$a" == "ABC" ]; then
     echo -e "\e[35m both are equal \e[0m"
     
 
 fi
 
 #If else condition
-if [ "$a"=="ABC" ]; then
+if [ "$a" == "ABC" ]; then
     echo -e "\e[34m both are equal \e[0m"
     exit 0
 else
