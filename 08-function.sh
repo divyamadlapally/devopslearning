@@ -16,3 +16,5 @@ stat() {
     echo "todays date is: $(date +%F)"
     echo "load average on the system in last 1 minute: $(uptime | awk -F : '{print $4}' | awk -F , '{print $1}')"
 }
+#echo calling stat function
+stat
