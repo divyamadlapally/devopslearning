@@ -11,8 +11,8 @@ done
 
 # while loop : a conditional loop
 
-i=10
-while [ $i -lt 0 ]; do
-  echo "iteration number is $i"
-  i=$(($i+1))
+val=0
+while [ $val -lt 0 ]; do
+  echo I=$val
+  i=$(($val+1))
   done
