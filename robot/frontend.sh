@@ -23,5 +23,11 @@ echo installing nginx
  systemctl enable nginx  &>> /tmp/frontend.log
 echo starting nginx
  systemctl start nginx   &>> /tmp/frontend.log
+  if [ $? -eq 0 ]; then 
+       echo -e "\e[36m success \e[0m"
+    else
+        echo -e "\e[31m failure \e[0m"
+    fi
+    
  # $? tells the exit code of the last command
  # send the logs to temporary folder &>> this redirects the std.out and std.error 
