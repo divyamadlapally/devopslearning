@@ -3,6 +3,7 @@
 set -e
 
 COMPONENT=frontend
+LOGFILE=/tmp/$COMPONENT.log
 
 
 # we need run the script as a root user
@@ -26,38 +27,37 @@ stat()
 }
 
 echo -n "installing nginx :"
-yum install nginx -y   &>> /tmp/frontend.log
+yum install nginx -y   &>> $LOGFILE
 stat $?
 
 echo -n "starting nginx :"
-systemctl enable nginx  &>> /tmp/frontend.log
-systemctl start nginx   &>> /tmp/frontend.log
-stat $?
+systemctl enable nginx  &>> $LOGFILE
+systemctl start nginx   &>> $LOGFILE
 
  # $? tells the exit code of the last command
  # send the logs to temporary folder &>> this redirects the std.out and std.error 
 
 echo -n "downloading the $COMPONENT :"
-curl -s -L -o /tmp/COMPONENT.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"
+curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"
 stat $?
 
 echo -n "clearing the  default content :"
 cd /usr/share/nginx/html
-rm -rf *   &>> /tmp/frontend.log
+rm -rf *   &>> $LOGFILE
 stat $?
 
 echo -n "Extracting $COMPONENT :" 
-unzip /tmp/$COMPONENT.zip   &>> /tmp/frontend.log
+unzip /tmp/$COMPONENT.zip   &>> $LOGFILE
 stat $?
 
 echo -n "Copying $COMPONENT :"
-mv frontend-main/* .         &>> /tmp/frontend.log
-mv static/* .                &>> /tmp/frontend.log
-rm -rf frontend-main README.md       &>> /tmp/frontend.log
+mv frontend-main/* .         &>> $LOGFILE
+mv static/* .                &>> $LOGFILE
+rm -rf frontend-main README.md       &>> $LOGFILE
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
 stat $?
 
 echo -n "Restarting nginx :"
-systemctl enable nginx  &>> /tmp/frontend.log
-systemctl start nginx   &>> /tmp/frontend.log
+systemctl enable nginx  &>> $LOGFILE
+systemctl start nginx   &>> $LOGFILE
 stat $?
