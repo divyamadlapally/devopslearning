@@ -40,7 +40,7 @@ stat $?
 echo -n "clearing the  default content :"
 cd /usr/share/nginx/html
 rm -rf *   &>> /tmp/frontend.log
-stst $?
+stat $?
 
 echo -n "Extracting $COMPONENT :" 
 unzip /tmp/$COMPONENT.zip   &>> /tmp/frontend.log
@@ -51,7 +51,7 @@ mv frontend-main/* .         &>> /tmp/frontend.log
 mv static/* .                &>> /tmp/frontend.log
 rm -rf frontend-main README.md       &>> /tmp/frontend.log
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
-stst $?
+stat $?
 
 echo -n " Restarting nginx :"
 systemctl enable nginx  &>> /tmp/frontend.log
