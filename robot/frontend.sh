@@ -1,4 +1,5 @@
 #!/bin/bash
+COMPONENT=frontend
 
 echo I am frontend
 
@@ -9,25 +10,27 @@ echo I am frontend
  if [ $ID -ne 0 ] ; then
  echo -e "\e[31m You need to run the script either as a root user or with a sudo privilage \e[0m" 
  exit 1
+ # exit 1 means script will be terminated then and there itself
 
- fi
 
-# exit 1 means script will be terminated then and there itself
-echo installing nginx
+stat() {
+if [ $? -eq 0 ]; then 
+       echo -e "\e[32m success \e[0m"
+    else
+        echo -e "\e[31m failure \e[0m"
+    fi
+}
+
+echo -n "installing nginx :"
  yum install nginx -y   &>> /tmp/frontend.log
- if [ $? -eq 0 ]; then 
-       echo -e "\e[36m success \e[0m"
-    else
-        echo -e "\e[31m failure \e[0m"
-    fi
+ stat()
  systemctl enable nginx  &>> /tmp/frontend.log
-echo starting nginx
+echo -n "starting nginx :"
  systemctl start nginx   &>> /tmp/frontend.log
-  if [ $? -eq 0 ]; then 
-       echo -e "\e[36m success \e[0m"
-    else
-        echo -e "\e[31m failure \e[0m"
-    fi
-    
+  stat
+
  # $? tells the exit code of the last command
  # send the logs to temporary folder &>> this redirects the std.out and std.error 
+echo -n downloading the $COMPONENT
+curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend/archive/main.zip"
+stat()
