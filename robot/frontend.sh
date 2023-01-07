@@ -18,7 +18,7 @@ if [ $1 -eq 0 ]; then
     else
         echo -e "\e[31m failure \e[0m"
     fi
-}
+    }
 
 echo -n "installing nginx :"
 yum install nginx -y   &>> /tmp/frontend.log
