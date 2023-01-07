@@ -12,13 +12,14 @@ COMPONENT=frontend
  # exit 1 means script will be terminated then and there itself
 
 
-stat() {
-if [ $1 -eq 0 ]; then 
+stat() 
+{
+    if [ $1 -eq 0 ]; then 
        echo -e "\e[32m success \e[0m"
     else
         echo -e "\e[31m failure \e[0m"
     fi
-    }
+}
 
 echo -n "installing nginx :"
 yum install nginx -y   &>> /tmp/frontend.log
