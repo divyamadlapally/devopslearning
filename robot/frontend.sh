@@ -7,8 +7,9 @@ COMPONENT=frontend
 
  ID=$(id -u)
  if [ $ID -ne 0 ] ; then
- echo -e "\e[31m You need to run the script either as a root user or with a sudo privilage \e[0m" 
- exit 1
+    echo -e "\e[31m You need to run the script either as a root user or with a sudo privilage \e[0m" 
+    exit 1
+ fi
  # exit 1 means script will be terminated then and there itself
 
 
@@ -34,3 +35,4 @@ stat $?
  # send the logs to temporary folder &>> this redirects the std.out and std.error 
 echo -n "downloading the $COMPONENT :"
 curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"
+stat $?
