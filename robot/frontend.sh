@@ -38,7 +38,7 @@ stat $?
  # send the logs to temporary folder &>> this redirects the std.out and std.error 
 
 echo -n "downloading the $COMPONENT :"
-curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"
+curl -s -L -o /tmp/COMPONENT.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"
 stat $?
 
 echo -n "clearing the  default content :"
