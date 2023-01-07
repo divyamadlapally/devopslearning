@@ -14,7 +14,8 @@ echo I am frontend
 
 # exit 1 means script will be terminated then and there itself
 
- yum install nginx -y
- systemctl enable nginx
- systemctl start nginx
-
+ yum install nginx -y   &>> /tmp/frontend.log
+ systemctl enable nginx  &>> /tmp/frontend.log
+ systemctl start nginx   &>> /tmp/frontend.log
+ 
+ # send the logs to temporary folder &>> this redirects the std.out and std.error 
