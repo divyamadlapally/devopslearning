@@ -1,7 +1,6 @@
 #!/bin/bash
 COMPONENT=frontend
 
-echo I am frontend
 
 # we need run the script as a root user
 # we need to do validation first, we need check whether root use or not $ id  ( $ id -u)if uid is 0 then it is root
