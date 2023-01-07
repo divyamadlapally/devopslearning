@@ -23,14 +23,14 @@ if [ $1 -eq 0 ]; then
 
 echo -n "installing nginx :"
  yum install nginx -y   &>> /tmp/frontend.log
- stat() $?
+ stat $?
  systemctl enable nginx  &>> /tmp/frontend.log
 echo -n "starting nginx :"
  systemctl start nginx   &>> /tmp/frontend.log
-  stat() $?
+  stat $?
 
  # $? tells the exit code of the last command
  # send the logs to temporary folder &>> this redirects the std.out and std.error 
 echo -n downloading the $COMPONENT
 curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend/archive/main.zip"
-stat() $?
+stat $?
