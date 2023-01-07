@@ -21,12 +21,13 @@ if [ $1 -eq 0 ]; then
 }
 
 echo -n "installing nginx :"
- yum install nginx -y   &>> /tmp/frontend.log
- stat $?
- systemctl enable nginx  &>> /tmp/frontend.log
+yum install nginx -y   &>> /tmp/frontend.log
+stat $?
+
 echo -n "starting nginx :"
- systemctl start nginx   &>> /tmp/frontend.log
-  stat $?
+systemctl enable nginx  &>> /tmp/frontend.log
+systemctl start nginx   &>> /tmp/frontend.log
+stat $?
 
  # $? tells the exit code of the last command
  # send the logs to temporary folder &>> this redirects the std.out and std.error 
