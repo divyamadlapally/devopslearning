@@ -3,28 +3,14 @@
 set -e
 
 COMPONENT=frontend
-LOGFILE=/tmp/$COMPONENT.log
+
+source common.sh
 
 
 # we need run the script as a root user
 # we need to do validation first, we need check whether root use or not $ id  ( $ id -u)if uid is 0 then it is root
+# exit 1 means script will be terminated then and there itself
 
- ID=$(id -u)
- if [ $ID -ne 0 ] ; then
-    echo -e "\e[31m You need to run the script either as a root user or with a sudo privilage \e[0m" 
-    exit 1
- fi
- # exit 1 means script will be terminated then and there itself
-
-
-stat() 
-{
-    if [ $1 -eq 0 ]; then 
-       echo -e "\e[32m success \e[0m"
-    else
-        echo -e "\e[31m failure \e[0m"
-    fi
-}
 
 echo -e "\e[32m ______ $COMPONENT configuration is starting_______\e[0m"
 
