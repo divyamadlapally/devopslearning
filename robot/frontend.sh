@@ -4,7 +4,7 @@ set -e
 
 COMPONENT=frontend
 
-source common.sh
+source robot/common.sh
 
 
 # we need run the script as a root user

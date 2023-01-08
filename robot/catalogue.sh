@@ -3,14 +3,14 @@ set -e
 
 COMPONENT=catalogue
 
-source common.sh
+source robot/common.sh
 
 echo -n "Configuring the nodejs repo: "
-curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash -
+curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash -      &>> $LOGFILE
 yum install nodejs -y   &>> $LOGFILE
 stat $?
 
 echo -n "Creating Application User $APPUSER "
-useradd $APPUSER
+useradd $APPUSER      &>> $LOGFILE
 stat $?
 

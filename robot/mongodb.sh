@@ -3,7 +3,7 @@ set -e
 
 COMPONENT=mongodb
 
-source common.sh
+source robot/common.sh
 
 
 
