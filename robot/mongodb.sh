@@ -44,9 +44,9 @@ stat $?
 
 echo -n "Extracting the $COMPONENT schema file : "
 cd /tmp
-unzip mongodb.zip    &>> $LOGFILE
+unzip -o mongodb.zip    &>> $LOGFILE
 stat $?
-
+# -o gives overriding
 echo -n "Injecting the schema : "
 cd mongodb-main
 mongo < catalogue.js     &>> $LOGFILE
