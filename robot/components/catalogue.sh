@@ -22,3 +22,9 @@ stat $?
 echo -n "Extracting the $COMPONENT : "
 cd /home/$APPUSER
 unzip -o /tmp/catalogue.zip    &>>  "${LOGFILE}"
+stat $?
+
+echo -n "Changing the ownership to $APPUSER"
+mv /home/$APPUSER/$COMPONENT-main /home/$APPUSER/$COMPONENT
+chown $APPUSER:$APPUSER /home/$APPUSER/$COMPONENT
+stat $?
