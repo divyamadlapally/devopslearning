@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -e
 
 COMPONENT=frontend
 
@@ -15,12 +14,12 @@ source components/common.sh
 echo -e "\e[32m ______ $COMPONENT configuration is starting_______\e[0m"
 
 echo -n "installing nginx :"
-yum install nginx -y   &>> $LOGFILE
+yum install nginx -y   &>> "${LOGFILE}"
 stat $?
 
 echo -n "starting nginx :"
-systemctl enable nginx  &>> $LOGFILE
-systemctl start nginx   &>> $LOGFILE
+systemctl enable nginx  &>> "${LOGFILE}"
+systemctl start nginx   &>>  "${LOGFILE}"
 
  # $? tells the exit code of the last command
  # send the logs to temporary folder &>> this redirects the std.out and std.error 
@@ -31,23 +30,22 @@ stat $?
 
 echo -n "clearing the  default content :"
 cd /usr/share/nginx/html
-rm -rf *   &>> $LOGFILE
+rm -rf *   &>> "${LOGFILE}"
 stat $?
 
 echo -n "Extracting $COMPONENT :" 
-unzip /tmp/$COMPONENT.zip   &>> $LOGFILE
+unzip /tmp/$COMPONENT.zip   &>> "${LOGFILE}"
 stat $?
 
 echo -n "Copying $COMPONENT :"
-mv frontend-main/* .         &>> $LOGFILE
-mv static/* .                &>> $LOGFILE
-rm -rf frontend-main README.md       &>> $LOGFILE
+mv frontend-main/* .         &>> "${LOGFILE}"
+mv static/* .                &>>  "${LOGFILE}"
+rm -rf frontend-main README.md       &>> "${LOGFILE}"
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
 stat $?
 
 echo -n "Restarting nginx :"
-systemctl enable nginx  &>> $LOGFILE
-systemctl start nginx   &>> $LOGFILE
-stat $?
+systemctl enable nginx  &>> "${LOGFILE}"
+systemctl start nginx   &>>   "${LOGFILE}"
 
 echo -e "\e[32m ______ $COMPONENT configuration completed_______\e[0m"
