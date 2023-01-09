@@ -6,6 +6,9 @@ source components/common.sh
 
 echo -n "Configuring the nodejs repo: "
 curl -sL https://rpm.nodesource.com/setup_16.x | bash       &>> "${LOGFILE}"
+stat $?
+
+echo -n "Installing nodeJs : "
 yum install nodejs -y   &>>  "${LOGFILE}"
 stat $?
 
@@ -19,12 +22,18 @@ echo -n "Downloading the $COMPONENT : "
 curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalogue/archive/main.zip"
 stat $?
 
-echo -n "Extracting the $COMPONENT : "
+echo -n "Cleanup and Extracting the $COMPONENT : "
+rm -rf /home/$APPUSER/$COMPONENT/
 cd /home/$APPUSER
 unzip -o /tmp/catalogue.zip    &>>  "${LOGFILE}"
 stat $?
 
 echo -n "Changing the ownership to $APPUSER"
 mv /home/$APPUSER/$COMPONENT-main /home/$APPUSER/$COMPONENT
-chown $APPUSER:$APPUSER /home/$APPUSER/$COMPONENT
+chown -R $APPUSER:$APPUSER /home/$APPUSER/$COMPONENT
+stat $?
+
+echo -n "Installing $COMPONENT Dependencies :"
+cd $COMPONENT
+npm install    &>>  "${LOGFILE}"
 stat $?
