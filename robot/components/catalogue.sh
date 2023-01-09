@@ -9,7 +9,7 @@ curl -sL https://rpm.nodesource.com/setup_16.x | bash       &>> "${LOGFILE}"
 yum install nodejs -y   &>>  "${LOGFILE}"
 stat $?
 
-echo -n "Creating Application User $APPUSER "
+echo -n "Creating Application User $APPUSER : "
 useradd $APPUSER      &>>  "${LOGFILE}"
 stat $?
 
