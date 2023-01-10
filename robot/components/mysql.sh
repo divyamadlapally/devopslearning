@@ -35,3 +35,16 @@ if [ $? -eq 0 ]; then
     echo "show plugins;" |  mysql -uroot -pRoboShop@1 | grep validate_password    &>> "${LOGFILE}"
     stat $?
 fi
+
+echo -n "Downloading the $COMPONENT schema : "
+curl -s -L -o /tmp/mysql.zip "https://github.com/stans-robot-project/mysql/archive/main.zip"     &>> "${LOGFILE}"
+cd /tmp
+unzip -o $COMPONENT.zip     &>> "${LOGFILE}"   
+stat $?
+
+echo -n " Injecting the $COMPONENT schema :"
+cd  $COMPONENT-main
+mysql -u root -pRoboShop@1 <shipping.sql
+stat $?
+
+echo -e "\e[32m_____$COMPONENT Configuration is completed______\e[0m"
