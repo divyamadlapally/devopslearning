@@ -37,3 +37,17 @@ echo -n "Installing $COMPONENT Dependencies :"
 cd $COMPONENT
 npm install    &>>  "${LOGFILE}"
 stat $?
+
+echo -n "Configuring the $COMPONENT Service : "
+sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/$APPUSER/$COMPONENT/systemd.service
+mv /home/$APPUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
+stat $?
+
+echo -n "Starting $COMPONENT Service : "
+systemctl daemon-reload      &>>  "${LOGFILE}"
+systemctl start catalogue       &>>  "${LOGFILE}"
+systemctl enable catalogue        &>>  "${LOGFILE}"
+stat $?
+
+
+echo -e "\e[32m_____$COMPONENT Configuration is completed______\e[0m"
