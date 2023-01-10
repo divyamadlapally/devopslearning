@@ -5,7 +5,7 @@ COMPONENT=redis
 source components/common.sh
 
 echo -n "Configuring  $COMPONENT repo"
-curl -L https://raw.githubusercontent.com/stans-robot-project/redis/main/redis.repo -o /etc/yum.repos.d/redis.repo
+curl -L https://raw.githubusercontent.com/stans-robot-project/redis/main/redis.repo -o /etc/yum.repos.d/redis.repo  &>> "${LOGFILE}"
 stat $?
 
 echo -n "Installing $COMPONENT : "
@@ -14,6 +14,7 @@ stat $?
 
 echo -n "whitelisting the $COMPONENT"
 sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis/redis.conf
 stat $?
 
 echo -n "statring $COMPONENT : "
