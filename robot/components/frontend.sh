@@ -38,9 +38,9 @@ unzip /tmp/$COMPONENT.zip   &>> "${LOGFILE}"
 stat $?
 
 echo -n "Copying $COMPONENT :"
-mv frontend-main/* .         &>> "${LOGFILE}"
+mv $COMPONENT-main/* .         &>> "${LOGFILE}"
 mv static/* .                &>>  "${LOGFILE}"
-rm -rf frontend-main README.md       &>> "${LOGFILE}"
+rm -rf $COMPONENT-main README.md       &>> "${LOGFILE}"
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
 stat $?
 
