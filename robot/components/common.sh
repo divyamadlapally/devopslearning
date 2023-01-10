@@ -15,6 +15,21 @@ stat()
         echo -e "\e[31m failure \e[0m"
     fi
 }
+JAVA() {
+    echo -n "Installing Maven : "
+    yum install maven -y    &>>  "${LOGFILE}"
+    stat $?
+
+    CREATE_USER
+
+    DOWNLOAD_AND_EXTRACT
+
+    echo -n "Generating the artifact : "
+    cd /home/$APPUSER/$COMPONENT/
+    mvn clean package     &>>  "${LOGFILE}"
+    mv target/$COMPONENT-1.0.jar $COMPONENT.jar
+
+}
 
 NODEJS() {
     echo -n "Configuring nodejs repo : "
@@ -69,7 +84,7 @@ NPM_INSTALL() {
 }
 CONFIGURE_SERVICE() {
     echo -n "Configuring the $COMPONENT Service : "
-    sed -i -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' /home/$APPUSER/$COMPONENT/systemd.service
+    sed -i -e 's/DBHOST/mysql.roboshop.internal/' -e 's/CARTENDPOINT/cart.roboshop.internal/' /home/$APPUSER/$COMPONENT/systemd.service
     mv /home/$APPUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
     stat $?
 

@@ -1,2 +1,4 @@
 #!/bin/bash
-echo I am shipping
+COMPONENT=shipping
+source components/shipping.sh
+JAVA
