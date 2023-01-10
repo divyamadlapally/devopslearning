@@ -28,7 +28,8 @@ JAVA() {
     cd /home/$APPUSER/$COMPONENT/
     mvn clean package     &>>  "${LOGFILE}"
     mv target/$COMPONENT-1.0.jar $COMPONENT.jar
-
+    
+    CONFIGURE_SERVICE
 }
 
 NODEJS() {

@@ -21,3 +21,4 @@ mysql:
 
 shipping:
 	bash components/shipping.sh
+
