@@ -5,7 +5,7 @@ COMPONENT=mysql
 source components/common.sh
 
 echo -n "Configuring $COMPONENT repo : "
-curl -s -L -o /etc/yum.repos.d/$COMPONENT.repo https://raw.githubusercontent.com/stans-robot-project/$COMPONENT/main/$COMPONENT.repo
+curl -s -L -o /etc/yum.repos.d/$COMPONENT.repo https://raw.githubusercontent.com/stans-robot-project/$COMPONENT/main/$COMPONENT.repo       &>> "${LOGFILE}"
 stat $?
 
 echo -n " Installing $COMPONENT : "
@@ -18,9 +18,20 @@ systemctl start mysqld
 stat $?
 
 echo -n "Fectching the default password : "
-DEFAULT_ROOT_PWD=$(grep 'A temporary password' /var/log/mysqld.log | awk '{print $NF}')
+DEFAULT_ROOT_PWD=$(grep 'A temporary password' /var/log/mysqld.log | awk '{print $NF}')      &>> "${LOGFILE}"
 stat $?
 
-echo -n " Resetting the default root password : "
-echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'Roboshop@1';" | mysql --connect-expired-password -uroot -p${DEFAULT_ROOT_PWD}
-stat $?
+# This should happen only if the default password is not changed, rest of the times, i dont want to change it.
+echo show databases | mysql -uroot -pRoboShop@1     &>> "${LOGFILE}"
+if [ $? -ne 0 ]; then
+    echo -n " Resetting the default root password : "
+    echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" | mysql --connect-expired-password -uroot -p${DEFAULT_ROOT_PWD}
+    stat $?
+fi
+
+echo "show plugins | mysql -uroot -pRoboShop@1 | grep validate_password;"    &>> "${LOGFILE}"
+if [ $? -ne 0 ]; then
+    echo -n " Uninstalling password validate plugin : "
+    echo "show plugins;" | mysql -uroot -pRoboShop@1 | grep validate_password    &>> "${LOGFILE}"
+    stat $?
+fi
