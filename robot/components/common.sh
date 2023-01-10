@@ -34,23 +34,6 @@ NODEJS() {
     CONFIGURE_SERVICE
 }
 
-CONFIGURE_SERVICE() {
-    echo -n "Configuring the $COMPONENT Service : "
-    sed -i -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' /home/$APPUSER/$COMPONENT/systemd.service
-    mv /home/$APPUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
-    stat $?
-
-    echo -n "Starting $COMPONENT Service : "
-    systemctl daemon-reload      &>>  "${LOGFILE}"
-    systemctl start $COMPONENT      &>>  "${LOGFILE}"
-    systemctl enable $COMPONENT        &>>  "${LOGFILE}"
-    stat $?
-
-
-    echo -e "\e[32m_____$COMPONENT Configuration is completed______\e[0m"
-
-}
-
 CREATE_USER() {
     id $APPUSER       &>>  "${LOGFILE}"
     if [ $? -ne 0 ] ; then
@@ -83,4 +66,20 @@ NPM_INSTALL() {
     npm install    &>>  "${LOGFILE}"
     stat $?
     
+}
+CONFIGURE_SERVICE() {
+    echo -n "Configuring the $COMPONENT Service : "
+    sed -i -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' /home/$APPUSER/$COMPONENT/systemd.service
+    mv /home/$APPUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
+    stat $?
+
+    echo -n "Starting $COMPONENT Service : "
+    systemctl daemon-reload      &>>  "${LOGFILE}"
+    systemctl start $COMPONENT      &>>  "${LOGFILE}"
+    systemctl enable $COMPONENT        &>>  "${LOGFILE}"
+    stat $?
+
+
+    echo -e "\e[32m_____$COMPONENT Configuration is completed______\e[0m"
+
 }

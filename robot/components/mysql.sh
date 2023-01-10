@@ -1,2 +1,6 @@
 #!/bin/bash
-echo I am mysql
+
+COMPONENT=mysql
+
+source components/common.sh
+
