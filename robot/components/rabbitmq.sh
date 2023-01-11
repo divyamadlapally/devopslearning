@@ -21,7 +21,7 @@ stat $?
 sudo rabbitmqctl list_users | grep "${APPUSER}"     &>>"${LOGFILE}"
 if [ $? -ne 0 ]; then
     echo -n "Creating application user on $COMPONENT : "
-    rabbitmqctl add_user roboshop roboshop123    
+    rabbitmqctl add_user roboshop roboshop123    &>> "${LOGFILE}"   
     stat $?
 fi
 

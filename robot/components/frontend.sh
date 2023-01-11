@@ -45,7 +45,7 @@ mv localhost.conf /etc/nginx/default.d/roboshop.conf
 stat $?
 
 for component in catalogue cart user shipping payment; do
-echo -n "Updating the backend reverse proxy dns records : "
+echo -n "Updating the $component backend reverse proxy dns records : "
 sed -i -e "/$component/s/localhost/$component.roboshop.internal/"  /etc/nginx/default.d/roboshop.conf
 stat $?
 done
