@@ -23,3 +23,10 @@ Following are the shell scripting topics which we discuss as a part of our proje
 8. Loops
 9. Basics of SED Command
 10. Commands
+
+
+
+^ : start
+$ : End of the line
+grep $devops : Looking for the line that are starting with devops
+grep devops$ : Looking for the line that are ending with devops

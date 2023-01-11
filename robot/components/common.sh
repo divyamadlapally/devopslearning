@@ -26,6 +26,14 @@ PYTHON(){
 
     DOWNLOAD_AND_EXTRACT
 
+    USERID=$(id -u roboshop)
+    GROUPID=$(id -g roboshop)
+    
+    echo -n "updating the UID and GID in the $COMPONENT.ini.file : "
+    sed -i -e "/^uid/ c uid=${USERID}"  -e "/^gid/ c gid=${GROUPID}"  /home/$APPUSER/$COMPONENT/$COMPONENT.ini
+    stat $?
+
+    CONFIGURE_SERVICE
 }
 
 
@@ -49,6 +57,7 @@ JAVA() {
     cd /home/$APPUSER/$COMPONENT/
     pip3 install -r requirements.txt     &>>  "${LOGFILE}"
     stat $?
+
 
 }
 
@@ -105,7 +114,7 @@ NPM_INSTALL() {
 }
 CONFIGURE_SERVICE() {
     echo -n "Configuring the $COMPONENT Service : "
-    sed -i -e 's/DBHOST/mysql.roboshop.internal/' -e 's/CARTENDPOINT/cart.roboshop.internal/' /home/$APPUSER/$COMPONENT/systemd.service
+    sed -i -e 's/CARTHOST/cart.roboshop.internal/' -e 's/USERHOST/user.roboshop.internal/' -e 's/AMQPHOST/rabbitmq.roboshop.internal/' /home/$APPUSER/$COMPONENT/systemd.service
     mv /home/$APPUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
     stat $?
 
