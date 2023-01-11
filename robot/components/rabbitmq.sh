@@ -18,9 +18,12 @@ systemctl start rabbitmq-server     &>> "${LOGFILE}"
 systemctl status rabbitmq-server -l     &>> "${LOGFILE}"
 stat $?
 
-echo -n "Creating $COMPONENT user : "
-rabbitmqctl add_user roboshop roboshop123
-stat $?
+sudo rabbitmqctl list_users | grep $APPUSER   "${LOGFILE}"
+if [ $? -ne 0 ]; then
+    echo -n "Creating $COMPONENT user : "
+    rabbitmqctl add_user roboshop roboshop123
+    stat $?
+fi
 
 echo -n "Configuring Tags and Permissions to $APPUSER : "
 rabbitmqctl set_user_tags roboshop administrator
