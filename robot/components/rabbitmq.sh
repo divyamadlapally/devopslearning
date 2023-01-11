@@ -1,7 +1,7 @@
 #!/bin/bash
 COMPONENT=rabbitmq
 
-source common.sh
+source components/common.sh
 
 echo -n " Installing and configuring $COMPONENT repo : "
 curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash   &>> "${LOGFILE}"

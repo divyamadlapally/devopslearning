@@ -2,6 +2,6 @@
 
 COMPONENT=shipping
 
-source components/shipping.sh
+source components/common.sh
 
 JAVA
