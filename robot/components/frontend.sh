@@ -46,7 +46,7 @@ stat $?
 
 for component in catalogue cart user shipping payment; do
 echo -n "Updating the backend reverse proxy dns records : "
-sed -i -e "/$component/s/localhost/$component.roboshop.internal"  /etc/nginx/default.d/roboshop.conf
+sed -i -e "/$component/s/localhost/$component.roboshop.internal/"  /etc/nginx/default.d/roboshop.conf
 stat $?
 done
 
