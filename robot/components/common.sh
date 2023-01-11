@@ -15,6 +15,21 @@ stat()
         echo -e "\e[31m failure \e[0m"
     fi
 }
+
+
+PYTHON(){
+    echo -n "Installing python3 and other dependencies : "
+    yum install python36 gcc python3-devel -y     &>>  "${LOGFILE}"
+    stat $?
+
+    CREATE_USER
+
+    DOWNLOAD_AND_EXTRACT
+
+}
+
+
+
 JAVA() {
     echo -n "Installing Maven : "
     yum install maven -y    &>>  "${LOGFILE}"
@@ -30,6 +45,11 @@ JAVA() {
     mv target/$COMPONENT-1.0.jar $COMPONENT.jar
     
     CONFIGURE_SERVICE
+
+    cd /home/$APPUSER/$COMPONENT/
+    pip3 install -r requirements.txt     &>>  "${LOGFILE}"
+    stat $?
+
 }
 
 NODEJS() {
