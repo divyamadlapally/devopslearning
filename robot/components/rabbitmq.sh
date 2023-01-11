@@ -20,14 +20,14 @@ stat $?
 
 sudo rabbitmqctl list_users | grep "${APPUSER}"     &>>"${LOGFILE}"
 if [ $? -ne 0 ]; then
-    echo -n "Creating $COMPONENT user : "
-    rabbitmqctl add_user roboshop roboshop123
+    echo -n "Creating application user on $COMPONENT : "
+    rabbitmqctl add_user roboshop roboshop123    
     stat $?
 fi
 
-echo -n "Configuring Tags and Permissions to $APPUSER : "
-rabbitmqctl set_user_tags roboshop administrator
-rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+echo -n "Adding Permissions to $APPUSER : "
+rabbitmqctl set_user_tags roboshop administrator       &>> "${LOGFILE}"
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"    &>> "${LOGFILE}"
 stat $?
 
 echo -e "\e[32m_____$COMPONENT Configuration is completed______\e[0m"
